@@ -23,7 +23,7 @@ FleetLink/
 
 🚀 Running Locally (without Docker)
 1. Clone the repo
-  git clone https://github.com/<your-username>/FleetLink.git
+  git clone https://github.com/rushikeshtaur12/FleetLink.git
   cd FleetLink
 2. Backend Setup
      cd fleetlink-backend
