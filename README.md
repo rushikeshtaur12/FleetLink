@@ -90,7 +90,14 @@ POST /api/bookings → Create booking
 
 GET /api/manage-bookings → View all bookings
 
-CANCEL /api/bookings/:id → Cancel booking**
+## 📬 API Documentation  
+
+You can test the FleetLink APIs directly using Postman:  
+
+👉 [**Open Postman Collection**](https://web.postman.co/workspace/My-Workspace~c61b29af-0f59-4bac-8ede-843f6aee4ed9/collection/38355067-5a35da7e-7940-44e9-a4f7-c7ee6ea933e6?action=share&source=copy-link&creator=38355067)
+
+
+
  
 
 
