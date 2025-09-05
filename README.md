@@ -50,7 +50,6 @@ FleetLink/
       
       MONGO_URI=mongodb://localhost:27017/fleetlink
       
-      npm run dev
       
    Backend will be available at: http://localhost:5000
    
