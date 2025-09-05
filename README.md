@@ -60,8 +60,9 @@ FleetLink/
    
    npm install
    
-   npm start
-   
+  
+
+ npm start
    Frontend will be available at: http://localhost:3000
    
 **🐳 Running with Docker**
