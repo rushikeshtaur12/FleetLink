@@ -1,20 +1,20 @@
-# Use Node.js LTS version
+# Use Node.js LTS
 FROM node:18
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and install deps
+# Copy package files first (better cache usage)
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy rest of the backend code
+# Copy the rest of the code
 COPY . .
 
-# Expose API port
+# Expose backend port
 EXPOSE 5000
 
-# Start backend server
+# Start the app
 CMD ["npm", "start"]
-
-
