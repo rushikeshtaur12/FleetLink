@@ -1,13 +1,19 @@
-FleetLink - Logistics Vehicle Booking System
+# 🚚 FleetLink - Logistics Vehicle Booking System
 
-FleetLink is a MERN stack application for managing and booking logistics vehicles.
-It includes:
+FleetLink is a **MERN stack** application for managing and booking logistics vehicles.  
+It provides an easy way to **search, book, and manage vehicles** while preventing scheduling conflicts.  
 
-Backend: Node.js + Express + MongoDB
+---
 
-Frontend: React + Tailwind CSS
+## ✨ Tech Stack
+- **Backend**: Node.js + Express + MongoDB  
+- **Frontend**: React + Tailwind CSS  
+- **Deployment**: Docker + Docker Compose  
 
-Dockerized: With docker-compose (frontend, backend, MongoDB)
+---
+
+## 📂 Project Structure
+
 
 FleetLink/
  ├── fleetlink-backend/      # Express + MongoDB backend
