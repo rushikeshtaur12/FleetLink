@@ -52,11 +52,14 @@ FleetLink/
 Vehicles
 
 POST /api/vehicles → Add a new vehicle
+
 GET /api/vehicles/available → Get available vehicles
 
 Bookings
 POST /api/bookings → Create booking
+
 GET /api/manage-bookings → View all bookings
+
 CANCEL /api/bookings/:id → Cancel booking
  
 
