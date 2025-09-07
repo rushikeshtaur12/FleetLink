@@ -68,10 +68,6 @@ FleetLink/
 1. Build & Start
    
   docker compose up --build
-<<<<<<< HEAD
-
-=======
->>>>>>> fa043bf (readme.md chnages)
   
     This will start:
       Backend → http://localhost:5000
@@ -81,10 +77,6 @@ FleetLink/
 3. Stop Containers
 
   docker compose down
-<<<<<<< HEAD
-
-=======
->>>>>>> fa043bf (readme.md chnages)
 
 **📌 API Endpoints
 Vehicles

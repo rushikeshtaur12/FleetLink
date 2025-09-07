@@ -10,11 +10,14 @@ RUN npm run build
 # Stage 2 - Serve with Nginx
 FROM nginx:alpine
 
-# Copy build files to Nginx html folder
+# Copy React build
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose frontend port
-EXPOSE 3000
+# Copy custom Nginx config for SPA routing
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Expose container port 80
+EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
