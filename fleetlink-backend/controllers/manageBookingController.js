@@ -1,14 +1,38 @@
 import Booking from "../models/Booking.js";
 
-// getting all bookings
+// getting all bookings with pagination
+// GET /api/manage-bookings?page=1&limit=4&filter=booked
 export const getAllBookings = async (req, res) => {
   try {
-    const bookings = await Booking.find().populate("vehicleId").sort({ createdAt: -1 });
-    res.status(200).json(bookings);
+    const { page = 1, limit = 10, filter = "all" } = req.query;
+    const query = {};
+
+    if (filter === "booked") {
+      query.isCancelled = false;
+    } else if (filter === "cancelled") {
+      query.isCancelled = true;
+    }
+
+    const total = await Booking.countDocuments(query);
+    const bookings = await Booking.find(query)
+      .populate("vehicleId")
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+
+    res.status(200).json({
+      bookings,
+      pagination: {
+        total,
+        page: Number(page),
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 // cancel booking
 export const cancelBooking = async (req, res) => {
