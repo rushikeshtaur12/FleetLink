@@ -67,7 +67,8 @@ FleetLink/
 **🐳 Running with Docker**
 1. Build & Start
    
-  docker-compose up --build
+  docker compose up --build
+
   
     This will start:
       Backend → http://localhost:5000
@@ -76,7 +77,8 @@ FleetLink/
       
 3. Stop Containers
 
-  docker-compose down
+  docker compose down
+
 
 **📌 API Endpoints
 Vehicles
