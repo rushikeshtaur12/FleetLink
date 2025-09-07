@@ -14,13 +14,13 @@ const generateCustomerId = () => `CUST-${Date.now()}-${Math.floor(Math.random() 
 
 export const createBooking = async (req, res) => {
   try {
-    const { vehicleId, fromPincode, toPincode, startTime } = req.body;
+    const { vehicleId, fromPincode, toPincode, startTime, customerName, customerEmail } =req.body;
 
     // basic validation
-    if (!vehicleId || !fromPincode || !toPincode || !startTime) {
+    if (!vehicleId || !fromPincode || !toPincode || !startTime || !customerName || !customerEmail) {
       return res
         .status(400)
-        .json({ message: "vehicleId, fromPincode, toPincode and startTime are required" });
+        .json({ message: "vehicleId, fromPincode, toPincode ,customerName, and customerEmail and startTime are required" });
     }
 
     const vehicle = await Vehicle.findById(vehicleId);
@@ -62,6 +62,8 @@ export const createBooking = async (req, res) => {
       startTime: start,
       endTime: end,
       customerId,
+      customerName,
+      customerEmail,
       isCancelled: false,
     });
 

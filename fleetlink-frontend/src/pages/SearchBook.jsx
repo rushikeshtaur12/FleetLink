@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getAvailableVehicles, bookVehicle } from "../api";
 import VehicleList from "../components/VehicleList";
+import BookingModal from "../components/BookingModal";
 
 const SearchBook = () => {
   const [form, setForm] = useState({
@@ -12,11 +13,13 @@ const SearchBook = () => {
   const [vehicles, setVehicles] = useState([]);
   const [message, setMessage] = useState("");
   const [loadingSearch, setLoadingSearch] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(null); // modal state
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSearch = async (e) => {
-    if (e && e.preventDefault) e.preventDefault();
+    e.preventDefault();
     setMessage("");
     setLoadingSearch(true);
     try {
@@ -27,7 +30,8 @@ const SearchBook = () => {
         startTime: form.startTime
       });
       setVehicles(Array.isArray(res.data) ? res.data : []);
-      if (!res.data.length) setMessage("No vehicles available for given criteria.");
+      if (!res.data.length)
+        setMessage("No vehicles available for given criteria.");
     } catch (err) {
       setMessage("❌ Error: " + (err.response?.data?.message || "Something went wrong"));
     } finally {
@@ -35,19 +39,22 @@ const SearchBook = () => {
     }
   };
 
-  const handleBook = async (vehicleId) => {
-    setMessage("");
+  const handleBookClick = (vehicle) => {
+    setSelectedVehicle(vehicle); // open modal
+  };
+
+  const handleConfirmBooking = async ({ name, email }) => {
     try {
-      // backend will generate customerId automatically
       await bookVehicle({
-        vehicleId,
+        vehicleId: selectedVehicle._id,
         fromPincode: form.fromPincode,
         toPincode: form.toPincode,
-        startTime: form.startTime
+        startTime: form.startTime,
+        customerName: name,
+        customerEmail: email
       });
       setMessage("✅ Booking successful!");
-      // remove booked vehicle from UI list
-      setVehicles((prev) => prev.filter((v) => v._id !== vehicleId));
+      setVehicles((prev) => prev.filter((v) => v._id !== selectedVehicle._id));
       setTimeout(() => setMessage(""), 3000);
     } catch (err) {
       setMessage("❌ Booking failed: " + (err.response?.data?.message || "Something went wrong"));
@@ -57,6 +64,8 @@ const SearchBook = () => {
   return (
     <div className="bg-white p-6 rounded-md shadow-md max-w-2xl mx-auto">
       <h2 className="text-xl font-semibold mb-4">Search & Book Vehicle</h2>
+
+      {/* Search Form */}
       <form onSubmit={handleSearch} className="space-y-3">
         <input
           name="capacityRequired"
@@ -89,7 +98,7 @@ const SearchBook = () => {
           value={form.startTime}
           onChange={handleChange}
           required
-          min={new Date().toISOString().slice(0, 16)} // 🚨 Prevent selecting past dates
+          min={new Date().toISOString().slice(0, 16)}
           className="w-full p-2 border rounded"
         />
         <button
@@ -102,7 +111,16 @@ const SearchBook = () => {
 
       {message && <p className="mt-4 text-center">{message}</p>}
 
-      <VehicleList vehicles={vehicles} onBook={handleBook} />
+      <VehicleList vehicles={vehicles} onBook={handleBookClick} />
+
+      {/* Booking Modal */}
+      {selectedVehicle && (
+        <BookingModal
+          vehicle={selectedVehicle}
+          onClose={() => setSelectedVehicle(null)}
+          onConfirm={handleConfirmBooking}
+        />
+      )}
     </div>
   );
 };

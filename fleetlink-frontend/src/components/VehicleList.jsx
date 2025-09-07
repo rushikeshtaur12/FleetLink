@@ -32,7 +32,7 @@ const VehicleList = ({ vehicles = [], onBook }) => {
           </div>
 
           <button
-            onClick={() => onBook(v._id)}
+            onClick={() => onBook(v)}   // pass whole vehicle object, not just id
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
           >
             Book

@@ -99,6 +99,15 @@ const ViewBookings = () => {
                 <h3 className="text-lg font-semibold mb-2">
                   {b.vehicleId?.name || "Unknown Vehicle"}
                 </h3>
+                 <p className="text-sm text-gray-600 mb-1">
+                  <strong>Customer ID:</strong> {b.customerId}
+                </p>
+                 <p className="text-sm text-gray-600 mb-1">
+                  <strong>Customer Name:</strong> {b.customerName}
+                </p>
+                <p className="text-sm text-gray-600 mb-1">
+                  <strong>Customer email:</strong> {b.customerEmail}
+                </p>
                 <p className="text-sm text-gray-600 mb-1">
                   <strong>From:</strong> {b.fromPincode} |{" "}
                   <strong>To:</strong> {b.toPincode}
@@ -110,9 +119,7 @@ const ViewBookings = () => {
                 <p className="text-sm text-gray-600 mb-1">
                   <strong>End:</strong> {new Date(b.endTime).toLocaleString()}
                 </p>
-                <p className="text-sm text-gray-600 mb-1">
-                  <strong>Customer:</strong> {b.customerId}
-                </p>
+               
                 <p className="text-sm mb-2">
                   <strong>Status:</strong>{" "}
                   <span

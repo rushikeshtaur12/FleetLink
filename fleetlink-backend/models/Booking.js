@@ -8,6 +8,8 @@ const bookingSchema = new mongoose.Schema({
   endTime: { type: Date, required: true },
   customerId: { type: String, required: true },
   isCancelled: { type: Boolean, default: false },
+  customerName: { type: String, required: true },   
+  customerEmail: { type: String, required: true }, 
   createdAt: { type: Date, default: Date.now }
 });
 
